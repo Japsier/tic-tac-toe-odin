@@ -1,0 +1,174 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    height: 100vh;
+}
+.container {
+    height: 100%;
+    display: grid;
+    grid-template: 100px 1fr 1fr/ 1fr;
+    justify-items: center;
+    align-items: center;
+}
+header {
+    grid-area: 1 / 1 / 2 / 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 38px;
+    width: 400px;;
+    border-radius: 20px;
+    margin-top: 20px;
+    border: 2px solid black;
+    padding: 20px;
+}
+.gameboard {
+    grid-area: 2 / 1 / 3 / 2;
+    width: 300px;
+    height: 300px;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    justify-content: center;
+    align-items: center;
+    position: relative
+}
+.gameboard > h1 {
+    position: absolute;
+    left: -20vw;
+    right: -20vw;
+    text-align: center;
+}
+.tile {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+}
+.tile:hover {
+    border: 2px solid black;
+}
+
+.ui {
+    grid-area: 3 / 1 / 4 / 2;
+    align-self: flex-start;
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    margin-top: 5vh;
+}
+.ui > button, .formContainer > button {
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #1A1A1A;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: #3B3B3B;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 60px;
+  min-width: 0;
+  outline: none;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 15rem;
+  will-change: transform;
+}
+
+.ui > button:disabled {
+  pointer-events: none;
+}
+
+.ui > button:hover, .formContainer > button:hover  {
+  color: #fff;
+  background-color: #1A1A1A;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.ui > button:active, .formContainer > button:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+.formContainer {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template: 1fr 60px / 1fr 1fr;
+    gap: 20px;
+}
+.formContainer > *:nth-child(1) {
+    grid-area: 1 / 1 / 2 / 2;
+}
+.formContainer > *:nth-child(2) {
+    grid-area: 1 / 2 / 2 / 3; 
+}
+.formContainer input, .formcontainer input:focus {
+    outline: none ;
+    padding: 5px;
+    font-size: 18px;
+    border: 0;
+    border-bottom: 1px solid black;
+}
+.formContainer h3 {
+    text-align: center;
+}
+.formContainer > *:nth-child(3) {
+    grid-area: 2 / 1 / 3 / 3;
+    justify-self: center;
+    align-self: center;
+
+}
+
+.gameStarted {
+    display: grid;
+    grid-template-columns: 1fr 250px 1fr;
+    align-items: center;
+    justify-items: center;
+    width: clamp(300px, 100%, 1000px);
+    gap: 30px;
+}
+.gameStarted > * {
+    padding: 30px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 28px;
+}
+.gameStarted > div:nth-child(1) {
+    text-decoration: underline;
+}
+
+
+
+
+
+
+
+/* locked */
+.ui > .buttonComputer {
+    pointer-events: none;
+   }
+   .ui > .buttonComputer:active {
+       box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+       
+   }
+   .ui > .buttonComputer:hover {
+       color: #3B3B3B;
+       background-color: white;
+       transform: translateY(0);
+       box-shadow: none;  
+   }
