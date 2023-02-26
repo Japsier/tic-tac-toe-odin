@@ -7,9 +7,12 @@ body {
 .container {
     height: 100%;
     display: grid;
-    grid-template: 100px 1fr 1fr/ 1fr;
+    grid-template: 100px 1fr / 1fr;
     justify-items: center;
     align-items: center;
+}
+.container:has(.gameboard) {
+    grid-template: 100px 1fr 1fr / 1fr;
 }
 header {
     grid-area: 1 / 1 / 2 / 2;
@@ -24,6 +27,7 @@ header {
     padding: 20px;
 }
 .gameboard {
+    display: none;
     grid-area: 2 / 1 / 3 / 2;
     width: 300px;
     height: 300px;
@@ -51,15 +55,22 @@ header {
 }
 .tile:hover {
     border: 2px solid black;
+    cursor: pointer;
+}
+.tile.selected:hover {
+    cursor: not-allowed;
 }
 
 .ui {
-    grid-area: 3 / 1 / 4 / 2;
+    grid-area: 2 / 1 / 3 / 2;
     align-self: flex-start;
     display: flex;
     align-items: flex-start;
     gap: 30px;
     margin-top: 5vh;
+}
+.ui.active {
+    grid-area: 3 / 1 / 4 / 2;
 }
 .ui > button, .formContainer > button {
   appearance: none;
@@ -89,11 +100,12 @@ header {
   will-change: transform;
 }
 
-.ui > button:disabled {
-  pointer-events: none;
+.ui button.buttonComputer:hover {
+    cursor: not-allowed;
 }
 
-.ui > button:hover, .formContainer > button:hover  {
+
+.ui > button.pvpButton:hover, .formContainer > button:hover  {
   color: #fff;
   background-color: #1A1A1A;
   box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
@@ -152,23 +164,8 @@ header {
     text-decoration: underline;
 }
 
-
-
-
-
-
-
-/* locked */
-.ui > .buttonComputer {
-    pointer-events: none;
-   }
-   .ui > .buttonComputer:active {
-       box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-       
-   }
-   .ui > .buttonComputer:hover {
-       color: #3B3B3B;
-       background-color: white;
-       transform: translateY(0);
-       box-shadow: none;  
-   }
+@media (width <= 550px) {
+    .ui {
+        flex-direction: column;
+    }
+}

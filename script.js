@@ -7,7 +7,6 @@ let gameboard = (() => {
     let clearBoard = () => gameboardArray = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
     let checkForWinner = () => {
         let x = gameboardArray //makes the conditionals below less long
-        console.table(x)
         //check horizontal lines
         if ((x[0] != " " && x[0] === x[1] && x[0] == x[2]) || (x[3] != " " && x[3] === x[4] && x[3] == x[5]) || (x[6] != " " && x[6] === x[7] && x[6] == x[8])) {
             return true
@@ -42,17 +41,26 @@ let player = (userName, userMarker) => {
 }
 
 const displayController = (() => {
-    let gameBoardDiv = document.querySelector(".gameboard")
+    let gameBoardDiv;
     let gameboardTiles = []
 
     let createBoard = () => {
-        for (let i = 0; i < 9; i++) {         
-        gameboardTiles[i] = document.createElement("div")
-        gameboardTiles[i].innerText = ""
-        gameboardTiles[i].classList.add("tile", `tile${i}`)
-        gameboardTiles[i].addEventListener("click", (e) => game.tileClicked(e.target, gameboardTiles.indexOf(e.target)))
-        gameBoardDiv.appendChild(gameboardTiles[i])
+        if (gameBoardDiv === undefined) {
+            const makeGameboard = document.createElement("div")
+            makeGameboard.classList.add("gameboard")
+            document.querySelector("header").parentNode.insertBefore(makeGameboard, document.querySelector("header"))
+            gameBoardDiv = document.querySelector(".gameboard")
+            document.querySelector(".ui").classList.add("active")
         }
+        for (let i = 0; i < 9; i++) {         
+            gameboardTiles[i] = document.createElement("div")
+            gameboardTiles[i].innerText = ""
+            gameboardTiles[i].classList.add("tile", `tile${i}`)
+            gameboardTiles[i].addEventListener("click", (e) => game.tileClicked(e.target, gameboardTiles.indexOf(e.target)))
+            gameBoardDiv.appendChild(gameboardTiles[i])
+        }
+
+
     }
 
     let createUserInputUI = () => {
@@ -159,7 +167,6 @@ const game = (() => {
     }
 
     
-    console.log(playerTurn)
     let tileClicked = (tile, location) => {
         if (!tile.innerText == " ") {
             return
@@ -167,14 +174,14 @@ const game = (() => {
 
         
         if (playerTurn == player1) {
-            console.log(tile)
+            tile.classList.add("selected")
             tile.innerText = player1.marker
             document.querySelector(".player1Section").style.textDecoration = "none"
             document.querySelector(".player2Section").style.textDecoration = "underline"
             playerTurn = player2
             gameboard.update(location, player1.marker)
         } else {
-            console.log(tile)
+            tile.classList.add("selected")
             tile.innerText = player2.marker
             document.querySelector(".player1Section").style.textDecoration = "underline"
             document.querySelector(".player2Section").style.textDecoration = "none"
